@@ -1,7 +1,7 @@
 /**
  * Created by lukas on 17.9.17.
  */
-public enum QualificationLevel {
+public enum QualLevel {
     ONE (1, "junior"),
     TWO (2, "senior"),
     THREE (3, "senior"),
@@ -10,7 +10,7 @@ public enum QualificationLevel {
     private final int level;
     private final String eligibility;
 
-    QualificationLevel(int level, String eligibility) {
+    private QualLevel(int level, String eligibility) {
         this.level = level;
         this.eligibility = eligibility;
     }
