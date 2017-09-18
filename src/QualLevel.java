@@ -16,7 +16,7 @@ public enum QualLevel {
         this.eligibility = eligibility;
     }
 
-    public int level() {
+    public int getLevel() {
         return this.level;
     }
 

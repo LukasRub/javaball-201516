@@ -60,15 +60,19 @@ public class Referee {
     }
 
     public String getFullName() {
-        return firstName + " " + lastName;
+        return this.firstName + " " + this.lastName;
     }
 
+    public String getQualificationString() {
+        return this.qualificationBody.getQualBodyTitle() + this.qualificationLevel.getLevel();
+    }
 
+    public Area getHomeArea() {
+        return this.area;
+    }
 
-
-
-
-
-
+    public ArrayList<Area> getAreaAvailability() {
+        return new ArrayList<Area>(this.areaAvailability);
+    }
 
 }
