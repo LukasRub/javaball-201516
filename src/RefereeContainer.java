@@ -6,11 +6,10 @@ import java.util.*;
 public class RefereeContainer {
 
     public static final int MAX_REFEREES = 12;
-    private static RefereeContainer ourInstance = null;
-    private TreeMap<String, Referee> referees;
+    private static RefereeContainer ourInstance;
+    private TreeMap<String, Referee> referees = new TreeMap<String, Referee>();
 
     private RefereeContainer() {
-        ourInstance.referees = new TreeMap<String, Referee>();
     }
 
     public static RefereeContainer getInstance() {
@@ -24,9 +23,14 @@ public class RefereeContainer {
 
     public void addReferee(Referee newReferee) {
         if (ourInstance.referees.size() < MAX_REFEREES) {
-            String newKey = findUniqueKey(newReferee.getInitials());
+            String newKey;
+            if (!newReferee.hasID() || (newReferee.hasID() && ourInstance.referees.containsKey(newReferee.getID())))
+                newKey = findUniqueKey(newReferee.getInitials());
+            else
+                newKey = newReferee.getID();
             ourInstance.referees.put(newKey, newReferee);
         }
+        else throw new RuntimeException("No more referees can be added.");
     }
 
     public TreeMap<String, Referee> getRefereeList() {
@@ -41,6 +45,12 @@ public class RefereeContainer {
         }
         while(ourInstance.referees.containsKey(potentialKey));
         return potentialKey;
+    }
+
+    public void printReferees(){
+        for (Map.Entry<String, Referee> entry : ourInstance.referees.entrySet()) {
+            System.out.println("Key: " + entry.getKey() + " | Value: " + entry.getValue().toString());
+        }
     }
 
 }

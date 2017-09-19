@@ -12,6 +12,8 @@ public class Referee {
 
     private String firstName;
     private String lastName;
+    private String id = null;
+    private boolean hasID = false;
     private String initials;
     private QualBody qualificationBody;
     private QualLevel qualificationLevel;
@@ -19,24 +21,28 @@ public class Referee {
     private ArrayList<Area> areaAvailability;
     private int matchesAllocated;
 
-    private Referee() {
-        areaAvailability = new ArrayList<Area>(Area.values().length);
-        areaAvailability.add(area);
-    }
-
     public Referee(String firstName, String lastName, String qualification,
-            String area, String areaAvailability, int matchesAllocated) {
+                   String area, String areaAvailability, int matchesAllocated) {
 
-        this();
+        this.areaAvailability = new ArrayList<Area>(Area.values().length);
         this.firstName = firstName;
         this.lastName = lastName;
         this.matchesAllocated = matchesAllocated;
 
         parseArea(area);
+        this.areaAvailability.add(this.area);
+
         parseInitials(firstName, lastName);
         parseQualificationString(qualification);
         parseAreaAvailability(areaAvailability);
 
+    }
+
+    public Referee(String id, String firstName, String lastName, String qualification,
+                   String area, String areaAvailability, int matchesAllocated) {
+        this(firstName, lastName, qualification, area, areaAvailability, matchesAllocated);
+        this.id = id;
+        hasID = true;
     }
 
     private void parseQualificationString(String qualification) throws IllegalArgumentException {
@@ -44,8 +50,8 @@ public class Referee {
         Pattern regex = Pattern.compile(pattern);
         Matcher matcher = regex.matcher(qualification);
         if (matcher.find()) {
-            qualificationBody = QualBody.parseFromString(matcher.group(0));
-            qualificationLevel = QualLevel.parseFromInt(Integer.parseInt(matcher.group(1)));
+            qualificationBody = QualBody.parseFromString(matcher.group(1));
+            qualificationLevel = QualLevel.parseFromInt(Integer.parseInt(matcher.group(2)));
         }
         else throw new IllegalArgumentException("Invalid qualification string.");
     }
@@ -70,7 +76,7 @@ public class Referee {
     }
 
     private void parseArea(String area) {
-
+        this.area = Area.parseFromString(area);
     }
 
     public String getFullName() {
@@ -91,6 +97,27 @@ public class Referee {
 
     public String getInitials() {
         return initials;
+    }
+
+    public boolean hasID() {
+        return hasID;
+    }
+
+    public String getID() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s %s%d from the %s, available areas: %s, matches allocated: %d",
+                firstName,
+                lastName,
+                qualificationBody.getQualBodyTitle(),
+                qualificationLevel.getLevel(),
+                area.toString(),
+                areaAvailability.toString(),
+                matchesAllocated
+        );
     }
 
 }

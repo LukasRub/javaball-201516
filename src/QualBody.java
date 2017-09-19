@@ -17,9 +17,12 @@ public enum QualBody {
 
     public static QualBody parseFromString(String qualificationBody) {
         QualBody qualBody = null;
-        if (qualificationBody == QualBody.NJB.qualBodyTitle) qualBody = QualBody.NJB;
-        if (qualificationBody == QualBody.IJB.qualBodyTitle) qualBody = QualBody.IJB;
-        if (qualBody == null) throw new IllegalArgumentException("Such qualification awarding body does not exist.");
+        if (qualificationBody.equals(QualBody.NJB.qualBodyTitle))
+            qualBody = QualBody.NJB;
+        if (qualificationBody.equals(QualBody.IJB.qualBodyTitle))
+            qualBody = QualBody.IJB;
+        if (qualBody == null)
+            throw new IllegalArgumentException("Such qualification awarding body does not exist.");
         return qualBody;
     }
 }

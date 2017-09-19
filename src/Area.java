@@ -20,7 +20,12 @@ public enum Area {
         return Math.abs(this.distance - other.distance);
     }
 
-    public Area parseFromString(String areaTitle) {
+    @Override
+    public String toString() {
+        return String.format("%s", this.areaTitle);
+    }
+
+    public static Area parseFromString(String areaTitle) {
         Area area = null;
         if (areaTitle.equalsIgnoreCase(Area.NORTH.areaTitle)) area = Area.NORTH;
         if (areaTitle.equalsIgnoreCase(Area.CENTRAL.areaTitle)) area = Area.CENTRAL;
