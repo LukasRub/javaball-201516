@@ -10,9 +10,9 @@ import java.util.regex.Pattern;
  */
 public class Referee {
 
-    private String id;
     private String firstName;
     private String lastName;
+    private String initials;
     private QualBody qualificationBody;
     private QualLevel qualificationLevel;
     private Area area;
@@ -20,20 +20,23 @@ public class Referee {
     private int matchesAllocated;
 
     private Referee() {
-        this.areaAvailability = new ArrayList<Area>();
-        this.areaAvailability.add(this.area);
+        areaAvailability = new ArrayList<Area>(Area.values().length);
+        areaAvailability.add(area);
     }
 
-    public Referee(String id, String firstName, String lastName, String qualification,
+    public Referee(String firstName, String lastName, String qualification,
             Area area, String areaAvailability, int matchesAllocated) {
+
         this();
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.parseQualificationString(qualification);
         this.area = area;
-        this.parseAreaAvailability(areaAvailability);
         this.matchesAllocated = matchesAllocated;
+
+        parseInitials(firstName, lastName);
+        parseQualificationString(qualification);
+        parseAreaAvailability(areaAvailability);
+
     }
 
     private void parseQualificationString(String qualification) throws IllegalArgumentException {
@@ -41,8 +44,8 @@ public class Referee {
         Pattern regex = Pattern.compile(pattern);
         Matcher matcher = regex.matcher(qualification);
         if (matcher.find()) {
-            this.qualificationBody = QualBody.parseFromString(matcher.group(0));
-            this.qualificationLevel = QualLevel.parseFromInt(Integer.parseInt(matcher.group(1)));
+            qualificationBody = QualBody.parseFromString(matcher.group(0));
+            qualificationLevel = QualLevel.parseFromInt(Integer.parseInt(matcher.group(1)));
         }
         else throw new IllegalArgumentException("Invalid qualification string.");
     }
@@ -59,20 +62,31 @@ public class Referee {
         }
     }
 
+    private void parseInitials(String firstName, String lastName) {
+        char[] initials = new char[2];
+        initials[0] = firstName.charAt(0);
+        initials[1] = lastName.charAt(0);
+        this.initials = new String(initials);
+    }
+
     public String getFullName() {
-        return this.firstName + " " + this.lastName;
+        return firstName + " " + lastName;
     }
 
     public String getQualificationString() {
-        return this.qualificationBody.getQualBodyTitle() + this.qualificationLevel.getLevel();
+        return qualificationBody.getQualBodyTitle() + this.qualificationLevel.getLevel();
     }
 
     public Area getHomeArea() {
-        return this.area;
+        return area;
     }
 
     public ArrayList<Area> getAreaAvailability() {
-        return new ArrayList<Area>(this.areaAvailability);
+        return new ArrayList<Area>(areaAvailability);
+    }
+
+    public String getInitials() {
+        return initials;
     }
 
 }
