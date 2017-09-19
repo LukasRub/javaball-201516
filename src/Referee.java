@@ -25,14 +25,14 @@ public class Referee {
     }
 
     public Referee(String firstName, String lastName, String qualification,
-            Area area, String areaAvailability, int matchesAllocated) {
+            String area, String areaAvailability, int matchesAllocated) {
 
         this();
         this.firstName = firstName;
         this.lastName = lastName;
-        this.area = area;
         this.matchesAllocated = matchesAllocated;
 
+        parseArea(area);
         parseInitials(firstName, lastName);
         parseQualificationString(qualification);
         parseAreaAvailability(areaAvailability);
@@ -67,6 +67,10 @@ public class Referee {
         initials[0] = firstName.charAt(0);
         initials[1] = lastName.charAt(0);
         this.initials = new String(initials);
+    }
+
+    private void parseArea(String area) {
+
     }
 
     public String getFullName() {
