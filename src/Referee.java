@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,11 +17,13 @@ public class Referee {
     private Area area;
     private ArrayList<Area> areaAvailability;
     private int matchesAllocated;
+    private LinkedList<Integer> assignedMatches;
 
-    public Referee(String firstName, String lastName, String qualification,
-                   String area, String areaAvailability, int matchesAllocated) {
+    public Referee(String firstName, String lastName, String qualification, String area, String areaAvailability,
+                   int matchesAllocated) {
 
         this.areaAvailability = new ArrayList<Area>(Area.values().length);
+        assignedMatches = new LinkedList<Integer>();
         this.firstName = firstName;
         this.lastName = lastName;
         this.matchesAllocated = matchesAllocated;
@@ -43,6 +42,15 @@ public class Referee {
         this(firstName, lastName, qualification, area, areaAvailability, matchesAllocated);
         this.id = id;
         hasID = true;
+    }
+
+    public Referee(String id, String firstName, String lastName, String qualification, String matchesAllocated,
+                   String area, String areaAvailability) {
+        this(id, firstName, lastName, qualification, area, areaAvailability, Integer.parseInt(matchesAllocated));
+    }
+
+    public Referee(String[] inputArray) {
+        this(inputArray[0], inputArray[1], inputArray[2], inputArray[3], inputArray[4], inputArray[5], inputArray[6]);
     }
 
     private void parseQualificationString(String qualification) throws IllegalArgumentException {
@@ -77,6 +85,11 @@ public class Referee {
 
     private void parseArea(String area) {
         this.area = Area.parseFromString(area);
+    }
+
+    public void assignMatch(int weekNumber) {
+        assignedMatches.addLast(weekNumber);
+        ++matchesAllocated;
     }
 
     public String getFullName() {

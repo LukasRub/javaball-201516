@@ -9,9 +9,6 @@ public class RefereeContainer {
     private static RefereeContainer ourInstance;
     private TreeMap<String, Referee> referees = new TreeMap<String, Referee>();
 
-    private RefereeContainer() {
-    }
-
     public static RefereeContainer getInstance() {
         if (ourInstance == null) {
             synchronized (RefereeContainer.class) {
