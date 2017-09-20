@@ -45,9 +45,11 @@ public class RefereeContainer {
     }
 
     public void printReferees(){
+        System.out.println("<===================== Referees =====================>");
         for (Map.Entry<String, Referee> entry : ourInstance.referees.entrySet()) {
             System.out.println("Key: " + entry.getKey() + " | Value: " + entry.getValue().toString());
         }
+        System.out.println();
     }
 
 }

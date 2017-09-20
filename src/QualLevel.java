@@ -2,10 +2,10 @@
  * Created by lukas on 17.9.17.
  */
 public enum QualLevel {
-    ONE (1, "junior"),
-    TWO (2, "senior"),
-    THREE (3, "senior"),
-    FOUR (4, "senior");
+    ONE (1, "Junior"),
+    TWO (2, "Senior"),
+    THREE (3, "Senior"),
+    FOUR (4, "Senior");
 
     private final int level;
     private final String eligibility;
@@ -20,7 +20,7 @@ public enum QualLevel {
         return this.level;
     }
 
-    public String eligibility() {
+    public String getEligibility() {
         return this.eligibility;
     }
 
