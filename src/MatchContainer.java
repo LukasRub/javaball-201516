@@ -46,7 +46,7 @@ public class MatchContainer {
     }
 
     private int getRandomWeekNumber() {
-        int weekNumberIndex = ourInstance.availableWeeks.get(0);
+        int weekNumberIndex = 0;
         int availableWeeks = ourInstance.availableWeeks.size();
         if (availableWeeks > 1) {
             Random rand = new Random();
@@ -58,7 +58,7 @@ public class MatchContainer {
     public void printMatches() {
         System.out.println("<===================== Matches =====================>");
         for (Map.Entry<Integer, Match> entry : ourInstance.matches.entrySet()) {
-            System.out.println(String.format("Key: %2d | Value: %s", entry.getKey(), entry.getValue().toString()));
+            System.out.println(String.format("Key: %2d | Value: | %s", entry.getKey(), entry.getValue().toString()));
         }
         System.out.println();
     }

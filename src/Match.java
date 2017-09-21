@@ -33,7 +33,7 @@ public class Match {
 
     @Override
     public String toString() {
-        return String.format("%s \t %-6s \t %s \t %s",
+        return String.format("%-7s| %-7s | %-27s | %-25s |",
                 requiredLevel.getEligibility(),
                 matchLocation.toString(),
                 assignedReferees.getFirst().getFullName(),

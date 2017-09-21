@@ -121,23 +121,24 @@ public class Referee {
     }
 
     private String assignedMatchesToString() {
-        String assignedMatchesToString = "";
+        String toString = "";
         if (!assignedMatches.isEmpty()) {
-            assignedMatchesToString += "\n\t\t\tMatches:";
+//            String labels = String.format("->| Week | Level  | Region  | %-20s | %-20s |", "Ref. no. 1", "Ref. no. 2");
+//            String dashLine = "  " + String.join("", Collections.nCopies(labels.length()-2, "-"));
+//            toString += "\n" + dashLine + "\n" + labels + "\n" + dashLine;
             for (Map.Entry<Integer, Match> entry : assignedMatches.entrySet()) {
-                assignedMatchesToString += "\n\t\t\tKey: " + entry.getKey() + " | Value: " + entry.getValue().toString();
+                toString += String.format("\n--->|%3d | %s", entry.getKey(), entry.getValue().toString());
+                toString += String.join("", Collections.nCopies(17, "-"));
             }
         }
-        return assignedMatchesToString;
+        return toString;
     }
 
     @Override
     public String toString() {
-        return String.format("%s %s %s%d from the %s, available areas: %s, matches allocated: %d %s",
-                firstName,
-                lastName,
-                qualificationBody.getQualBodyTitle(),
-                qualificationLevel.getLevel(),
+        return String.format("%-16s | %-13s | %-11s | %-25s | %14d | %s",
+                getFullName(),
+                qualificationBody.getQualBodyTitle() + qualificationLevel.getLevel(),
                 area.toString(),
                 areaAvailability.toString(),
                 matchesAllocated,

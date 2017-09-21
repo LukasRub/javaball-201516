@@ -23,7 +23,6 @@ public class Main {
             e.printStackTrace();
         }
 
-
         Match match1 = new Match(QualLevel.TWO, Area.CENTRAL);
         match1.assignReferee(referees.getRefereeList().get("DG1"));
         match1.assignReferee(referees.getRefereeList().get("DG2"));
@@ -33,64 +32,11 @@ public class Main {
         match2.assignReferee(referees.getRefereeList().get("DG3"));
 
         MatchContainer matches = MatchContainer.getInstance();
-        matches.addMatch(2, match2);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
-        matches.addMatch(match1);
+        matches.addMatch(2, match1);
+        matches.addMatch(match2);
 
-
-
-
-        referees.printReferees();
+        System.out.println(referees.toString());
         matches.printMatches();
-
-        System.out.println(matches.size());
 
     }
 

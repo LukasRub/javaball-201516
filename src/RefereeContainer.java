@@ -44,12 +44,16 @@ public class RefereeContainer {
         return potentialKey;
     }
 
-    public void printReferees(){
-        System.out.println("<===================== Referees =====================>");
+    @Override
+    public String toString(){
+        String labels = String.format("| %6s | %-16s | Qualification | Home region | %-25s | No. of matches |",  "ID", "Name", "Available regions");
+        String dashLine = String.join("", Collections.nCopies(labels.length(), "-"));
+        String toString = dashLine + "\n" + labels + "\n" + dashLine;
         for (Map.Entry<String, Referee> entry : ourInstance.referees.entrySet()) {
-            System.out.println("Key: " + entry.getKey() + " | Value: " + entry.getValue().toString());
+            toString += String.format("\n|%7s | %s", entry.getKey(), entry.getValue().toString());
+            toString += "\n" + dashLine;
         }
-        System.out.println();
+        return toString;
     }
 
 }
