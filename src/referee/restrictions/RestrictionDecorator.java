@@ -1,5 +1,6 @@
 package referee.restrictions;
 
+import match.Match;
 import referee.Referee;
 
 import java.util.TreeMap;
@@ -13,10 +14,6 @@ public abstract class RestrictionDecorator extends LevelRestriction {
 
     public RestrictionDecorator(Restriction restriction) {
         this.restriction = restriction;
-    }
-
-    public TreeMap<String, Referee> applyRestriction() {
-        return restriction.getRefereeList();
     }
 
 }

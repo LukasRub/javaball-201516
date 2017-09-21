@@ -123,8 +123,19 @@ public class Referee {
         return hasID;
     }
 
+    public boolean wouldTravelTo(Area area) {
+        boolean  wouldTravelTo = false;
+        if (this.areaAvailability.indexOf(area) > -1)
+            wouldTravelTo = true;
+        return wouldTravelTo;
+    }
+
     public String getID() {
         return id;
+    }
+
+    public int getMatchesAllocated() {
+        return matchesAllocated;
     }
 
     private String assignedMatchesToString() {
@@ -140,6 +151,7 @@ public class Referee {
         }
         return toString;
     }
+
 
     @Override
     public String toString() {

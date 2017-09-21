@@ -3,11 +3,11 @@ import match.Match;
 import referee.Referee;
 import referee.RefereeContainer;
 import referee.qualifications.QualLevel;
-import referee.restrictions.LevelRestriction;
-import referee.restrictions.Restriction;
-import referee.restrictions.SameAreaRestriction;
+import referee.restrictions.*;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by lukas on 17.9.19.
@@ -32,20 +32,40 @@ public class Main {
             e.printStackTrace();
         }
 
-        Match match = new Match(QualLevel.TWO, Area.CENTRAL);
-        Restriction restriction = new SameAreaRestriction(new LevelRestriction(referees.getRefereeList(), match));
+        Match match = new Match(QualLevel.TWO, Area.NORTH);
+        TreeMap<String, Referee> initialRefereeList = new TreeMap<String, Referee>(referees.getRefereeList());
+        TreeMap<String, Referee> refereeList = new TreeMap<String, Referee>(referees.getRefereeList());
+
+        Restriction restriction = new SameAreaRestriction(new LevelRestriction(refereeList, match));
+        if (restriction.getRefereeList().size() > 2) {
+            restriction = new LessMatchesRestriction(restriction);
+            refereeList = restriction.getRefereeList();
+            match.assignReferee(refereeList.firstEntry().getValue());
+            match.assignReferee(refereeList.lastEntry().getValue());
+        }
+        else {
+            boolean firstRefereeAssigned = false;
+            if (restriction.getRefereeList().size() == 1 ) {
+                Map.Entry<String, Referee> entry = refereeList.firstEntry();
+                match.assignReferee(entry.getValue());
+                firstRefereeAssigned = true;
+                refereeList = new TreeMap<String, Referee>(referees.getRefereeList());
+                refereeList.remove(entry.getKey());
+            }
+            restriction = new TravelRestriction(new LevelRestriction(refereeList, match), 1);
+
+        }
+//        restriction.getRefereeList();
+
+        System.out.println(match.toString());
+
+
 //        restriction.
 
-        match.assignReferee(referees.getRefereeList().get("DG1"));
-        match.assignReferee(referees.getRefereeList().get("DG2"));
+//        match.assignReferee(referees.getRefereeList().get("DG1"));
+//        match.assignReferee(referees.getRefereeList().get("DG2"));
         System.out.println(restriction.getRefereeList());
-
-//        MatchContainer matches = MatchContainer.getInstance();
-//        matches.addMatch(2, match1);
-//        matches.addMatch(match2);
-//
         System.out.println(referees.toString());
-//        matches.printMatches();
 
 
 
