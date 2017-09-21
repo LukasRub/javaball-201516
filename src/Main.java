@@ -1,3 +1,12 @@
+import general.Area;
+import match.Match;
+import referee.Referee;
+import referee.RefereeContainer;
+import referee.qualifications.QualLevel;
+import referee.restrictions.LevelRestriction;
+import referee.restrictions.Restriction;
+import referee.restrictions.SameAreaRestriction;
+
 import java.io.IOException;
 
 /**
@@ -23,20 +32,22 @@ public class Main {
             e.printStackTrace();
         }
 
-        Match match1 = new Match(QualLevel.TWO, Area.CENTRAL);
-        match1.assignReferee(referees.getRefereeList().get("DG1"));
-        match1.assignReferee(referees.getRefereeList().get("DG2"));
+        Match match = new Match(QualLevel.TWO, Area.CENTRAL);
+        Restriction restriction = new SameAreaRestriction(new LevelRestriction(referees.getRefereeList(), match));
+//        restriction.
 
-        Match match2 = new Match(QualLevel.FOUR, Area.NORTH);
-        match2.assignReferee(referees.getRefereeList().get("DG2"));
-        match2.assignReferee(referees.getRefereeList().get("DG3"));
+        match.assignReferee(referees.getRefereeList().get("DG1"));
+        match.assignReferee(referees.getRefereeList().get("DG2"));
+        System.out.println(restriction.getRefereeList());
 
-        MatchContainer matches = MatchContainer.getInstance();
-        matches.addMatch(2, match1);
-        matches.addMatch(match2);
-
+//        MatchContainer matches = MatchContainer.getInstance();
+//        matches.addMatch(2, match1);
+//        matches.addMatch(match2);
+//
         System.out.println(referees.toString());
-        matches.printMatches();
+//        matches.printMatches();
+
+
 
     }
 

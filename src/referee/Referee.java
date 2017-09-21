@@ -1,3 +1,10 @@
+package referee;
+
+import referee.qualifications.QualBody;
+import referee.qualifications.QualLevel;
+import general.Area;
+import match.Match;
+
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -104,8 +111,8 @@ public class Referee {
         return area;
     }
 
-    public ArrayList<Area> getAreaAvailability() {
-        return new ArrayList<Area>(areaAvailability);
+    public QualLevel getQualificationLevel() {
+        return qualificationLevel;
     }
 
     public String getInitials() {
@@ -136,9 +143,16 @@ public class Referee {
 
     @Override
     public String toString() {
-        return String.format("%-16s | %-13s | %-11s | %-25s | %14d | %s",
+//        return String.format("%-16s | %-13s | %-11s | %-25s | %14d | %s",
+//                getFullName(),
+//                qualificationBody.getQualBodyTitle() + qualificationLevel.getLevel(),
+//                area.toString(),
+//                areaAvailability.toString(),
+//                matchesAllocated,
+//                assignedMatchesToString()
+        return String.format("%-18s %-15s %-12s %-25s %17d %s",
                 getFullName(),
-                qualificationBody.getQualBodyTitle() + qualificationLevel.getLevel(),
+                getQualificationString(),
                 area.toString(),
                 areaAvailability.toString(),
                 matchesAllocated,

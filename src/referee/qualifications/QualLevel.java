@@ -1,3 +1,5 @@
+package referee.qualifications;
+
 /**
  * Created by lukas on 17.9.17.
  */
@@ -9,7 +11,6 @@ public enum QualLevel {
 
     private final int level;
     private final String eligibility;
-    public static final int maxLevel = 4;
 
     private QualLevel(int level, String eligibility) {
         this.level = level;
@@ -39,4 +40,5 @@ public enum QualLevel {
         }
         return  qualLevel;
     }
+
 }

@@ -1,3 +1,5 @@
+package referee.qualifications;
+
 /**
  * Created by lukas on 17.9.17.
  */

@@ -1,4 +1,4 @@
-/**
+package general; /**
  * Created by lukas on 17.9.17.
  */
 import java.lang.Math;

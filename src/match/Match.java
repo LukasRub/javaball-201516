@@ -1,3 +1,9 @@
+package match;
+
+import referee.Referee;
+import referee.qualifications.QualLevel;
+import general.Area;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
@@ -29,6 +35,14 @@ public class Match {
         while (iterator.hasNext()) {
             iterator.next().assignMatch(entry);
         }
+    }
+
+    public Area getMatchLocation() {
+        return matchLocation;
+    }
+
+    public QualLevel getRequiredLevel() {
+        return requiredLevel;
     }
 
     @Override
