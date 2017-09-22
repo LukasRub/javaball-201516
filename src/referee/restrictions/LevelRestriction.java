@@ -31,11 +31,7 @@ public class LevelRestriction implements Restriction {
             QualLevel requiredLevel = match.getRequiredLevel();
             QualLevel currentRefereeLevel = entry.getValue().getQualificationLevel();
 
-            if ((
-                    (requiredLevel == QualLevel.ONE) && (currentRefereeLevel == requiredLevel )
-                )
-                    ||
-                    (currentRefereeLevel.getLevel() >= requiredLevel.getLevel())) {
+            if (((requiredLevel == QualLevel.ONE) && (currentRefereeLevel == requiredLevel )) || (currentRefereeLevel != QualLevel.ONE)) {
                 candidates.put(entry.getKey(), entry.getValue());
             }
             if (entry.getValue().getQualificationLevel().getLevel() >= match.getRequiredLevel().getLevel()) {}

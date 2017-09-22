@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by lukas on 17.9.20.
  */
 public class Match {
-    public static final int REFEREES_PER_MATCH = 2;
+    public static final int REFEREES_PER_MATCH = 3;
 
     private QualLevel requiredLevel;
     private Area matchLocation;

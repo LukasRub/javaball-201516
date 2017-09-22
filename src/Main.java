@@ -16,14 +16,9 @@ public class Main {
 
         RefereeContainer referees = RefereeContainer.getInstance();
 
-        Referee ref1 = new Referee("David", "Guerrera", "NJB4", "North", "YNN", 0);
-        Referee ref2 = new Referee("DG2", "Donald", "Grayson", "NJB2", "Central", "YYN", 16);
-        Referee ref3 = new Referee("Daniel", "Garland", "IJB1", "North", "YYY", 5);
-
-        referees.addReferee(ref1);
-        referees.addReferee(ref2);
-        referees.addReferee(ref3);
-
+        referees.addReferee(new Referee("David", "Guerrera", "NJB4", "North", "YNN", 0));
+        referees.addReferee(new Referee("DG2", "Donald", "Grayson", "NJB2", "Central", "YYN", 16));
+        referees.addReferee(new Referee("Daniel", "Garland", "IJB1", "North", "YYY", 5));
         referees.addReferee(new Referee("Lukas", "Rubikas", QualBody.NJB, QualLevel.FOUR, Area.CENTRAL,
                 new ArrayList<Area>(Arrays.asList(Area.NORTH, Area.CENTRAL)), 5));
         referees.addReferee(new Referee("Paul", "Stevenson", "IJB4", "South", "YNY", 4));
@@ -65,7 +60,6 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         System.out.println(referees.toString());
 
