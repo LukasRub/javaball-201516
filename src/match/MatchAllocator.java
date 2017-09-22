@@ -7,6 +7,7 @@ import referee.restrictions.LevelRestriction;
 import referee.restrictions.Restriction;
 import referee.restrictions.TravelRestriction;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -15,36 +16,44 @@ import java.util.TreeMap;
  */
 public class MatchAllocator {
 
-    public static void findSuitableReferees(Match match) {
+    private static RefereeContainer refereeContainer = RefereeContainer.getInstance();
 
-        RefereeContainer refereeContainer = RefereeContainer.getInstance();
-        TreeMap<String, Referee> initialList = new TreeMap<String, Referee>(refereeContainer.getRefereeList());
-
-        TreeMap<String, Referee> selectedReferees =
-                recursiveShit(new TreeMap<String, Referee>(), initialList, match, 0);
-
-        System.out.println(selectedReferees);
-
+    public static void findAssignSuitableReferees(int weekNumber, Match match) {
+        LinkedHashMap<String, Referee> selectedReferees = findSuitableReferees(match);
+        for (Map.Entry<String, Referee> entry : selectedReferees.entrySet()) {
+            match.assignReferee(refereeContainer.getRefereeList().get(entry.getKey()));
+        }
+        MatchContainer.getInstance().addMatch(weekNumber, match);
     }
 
-    private static TreeMap<String, Referee> recursiveShit(TreeMap<String, Referee> selected,
-                                                   TreeMap<String, Referee> candidates,
-                                                   final Match match, int travelDistance) {
+    public static void findAssignSuitableReferees(Match match) {
+        LinkedHashMap<String, Referee> selectedReferees = findSuitableReferees(match);
+        for (Map.Entry<String, Referee> entry : selectedReferees.entrySet()) {
+            match.assignReferee(refereeContainer.getRefereeList().get(entry.getKey()));
+        }
+        MatchContainer.getInstance().addMatch(match);
+    }
+
+    private static LinkedHashMap<String, Referee> findSuitableReferees(Match match) {
+        TreeMap<String, Referee> initialList = new TreeMap<String, Referee>(refereeContainer.getRefereeList());
+        return recursiveSearch(new LinkedHashMap<String, Referee>(), initialList, match, 0);
+    }
+
+    private static LinkedHashMap<String, Referee> recursiveSearch(LinkedHashMap<String, Referee> selected,
+                                                            TreeMap<String, Referee> candidates,
+                                                            final Match match, int travelDistance) {
         if ((selected.size() == Match.REFEREES_PER_MATCH) || (travelDistance > Area.values().length)) {
             return selected;
         }
-
         TreeMap<String, Referee> list = applyRestrictions(candidates, match, travelDistance);
-
         if ((list.size() + selected.size()) <= Match.REFEREES_PER_MATCH) {
             copyAndDeleteEntries(list, selected, candidates);
         }
         else  {
-            copyAndDeleteEntries(findRefsWithLeastAllocs(list, Match.REFEREES_PER_MATCH - selected.size()),
-                    selected, candidates);
+            int numberOfRefsRequired = Match.REFEREES_PER_MATCH - selected.size();
+            copyAndDeleteEntries(findRefsWithLeastAllocs(list, numberOfRefsRequired), selected, candidates);
         }
-
-        return recursiveShit(selected, candidates, match, ++travelDistance);
+        return recursiveSearch(selected, candidates, match, ++travelDistance);
     }
 
     private static TreeMap<String, Referee> applyRestrictions(TreeMap<String, Referee> refereeList,
@@ -53,7 +62,7 @@ public class MatchAllocator {
         return restriction.getRefereeList();
     }
 
-    private static void copyAndDeleteEntries(TreeMap<String, Referee> from, TreeMap<String, Referee> to,
+    private static void copyAndDeleteEntries(TreeMap<String, Referee> from, LinkedHashMap<String, Referee> to,
                                       TreeMap<String, Referee> other) {
         for(Map.Entry<String, Referee> entry : from.entrySet()) {
             to.put(entry.getKey(), entry.getValue());
@@ -82,6 +91,5 @@ public class MatchAllocator {
         }
         return minEntry;
     }
-
 
 }

@@ -6,7 +6,7 @@ import referee.qualifications.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+
 /**
  * Created by lukas on 17.9.19.
  */
@@ -35,7 +35,25 @@ public class Main {
             e.printStackTrace();
         }
 
-        MatchAllocator.findSuitableReferees(new Match(QualLevel.FOUR, Area.NORTH));
+        MatchAllocator.findAssignSuitableReferees(14, new Match(QualLevel.FOUR, Area.NORTH));
+        MatchAllocator.findAssignSuitableReferees(15, new Match(QualLevel.ONE, Area.SOUTH));
+        MatchAllocator.findAssignSuitableReferees(28, new Match(QualLevel.FOUR, Area.SOUTH));
+        MatchAllocator.findAssignSuitableReferees(52, new Match(QualLevel.THREE, Area.NORTH));
+        MatchAllocator.findAssignSuitableReferees(13, new Match(QualLevel.FOUR, Area.CENTRAL));
+        MatchAllocator.findAssignSuitableReferees(51, new Match(QualLevel.ONE, Area.NORTH));
+        MatchAllocator.findAssignSuitableReferees(3, new Match(QualLevel.ONE, Area.NORTH));
+        MatchAllocator.findAssignSuitableReferees(new Match(QualLevel.TWO, Area.CENTRAL));
+        MatchAllocator.findAssignSuitableReferees(new Match(QualLevel.FOUR, Area.SOUTH));
+        MatchAllocator.findAssignSuitableReferees(new Match(QualLevel.TWO, Area.NORTH));
+        MatchAllocator.findAssignSuitableReferees(new Match(QualLevel.ONE, Area.SOUTH));
+        MatchAllocator.findAssignSuitableReferees(new Match(QualLevel.THREE, Area.NORTH));
+        MatchAllocator.findAssignSuitableReferees(new Match(QualLevel.ONE, Area.SOUTH));
+        MatchAllocator.findAssignSuitableReferees(new Match(QualLevel.FOUR, Area.NORTH));
+        MatchAllocator.findAssignSuitableReferees(new Match(QualLevel.THREE, Area.CENTRAL));
+        MatchAllocator.findAssignSuitableReferees(new Match(QualLevel.ONE, Area.NORTH));
+        MatchAllocator.findAssignSuitableReferees(new Match(QualLevel.FOUR, Area.CENTRAL));
+        MatchAllocator.findAssignSuitableReferees(new Match(QualLevel.ONE, Area.CENTRAL));
+        MatchAllocator.findAssignSuitableReferees(new Match(QualLevel.ONE, Area.NORTH));
 
 //        Match match = new Match(QualLevel.FOUR, Area.NORTH);
 //        match.assignReferee(referees.getRefereeList().get("DG1"));

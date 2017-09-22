@@ -155,12 +155,9 @@ public class Referee {
     private String assignedMatchesToString() {
         String toString = "";
         if (!assignedMatches.isEmpty()) {
-//            String labels = String.format("->| Week | Level  | Region  | %-20s | %-20s |", "Ref. no. 1", "Ref. no. 2");
-//            String dashLine = "  " + String.join("", Collections.nCopies(labels.length()-2, "-"));
-//            toString += "\n" + dashLine + "\n" + labels + "\n" + dashLine;
+            toString += '\n';
             for (Map.Entry<Integer, Match> entry : assignedMatches.entrySet()) {
-                toString += String.format("\n--->|%3d | %s", entry.getKey(), entry.getValue().toString());
-                toString += String.join("", Collections.nCopies(17, "-"));
+                toString += String.format("\n-------->|%3d | %s", entry.getKey(), entry.getValue().toString());
             }
         }
         return toString;
@@ -169,13 +166,6 @@ public class Referee {
 
     @Override
     public String toString() {
-//        return String.format("%-16s | %-13s | %-11s | %-25s | %14d | %s",
-//                getFullName(),
-//                qualificationBody.getQualBodyTitle() + qualificationLevel.getLevel(),
-//                area.toString(),
-//                areaAvailability.toString(),
-//                matchesAllocated,
-//                assignedMatchesToString()
         return String.format("%-18s %-15s %-12s %-25s %17d %s",
                 getFullName(),
                 getQualificationString(),

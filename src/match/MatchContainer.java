@@ -12,7 +12,7 @@ public class MatchContainer {
     public static final int NUMBER_OF_WEEKS = 52;
 
     private static MatchContainer ourInstance;
-    private TreeMap<Integer, Match> matches = new TreeMap<Integer, Match>();
+    private LinkedHashMap<Integer, Match> matches = new LinkedHashMap<Integer, Match>();
     private ArrayList<Integer> availableWeeks = new ArrayList<Integer>(NUMBER_OF_WEEKS);
 
     public static MatchContainer getInstance() {
@@ -63,15 +63,11 @@ public class MatchContainer {
         return !ourInstance.matches.containsKey(weekNumber);
     }
 
-    public int size() {
-        return ourInstance.matches.size();
-    }
-
     @Override
     public String toString() {
         String toString = "";
         for (Map.Entry<Integer, Match> entry : ourInstance.matches.entrySet()) {
-            toString += String.format("%2d %s", entry.getKey(), entry.getValue().toString());
+            toString += String.format("%2d %s\n", entry.getKey(), entry.getValue().toString());
         }
         return toString;
     }

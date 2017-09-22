@@ -45,13 +45,21 @@ public class Match {
         return requiredLevel;
     }
 
+    public String assignedRefereesToString() {
+        String assignedRefereesToString = "";
+        Iterator<Referee> iterator = assignedReferees.iterator();
+        while (iterator.hasNext()) {
+            assignedRefereesToString += String.format("%-25s", iterator.next().getFullName());
+        }
+        return assignedRefereesToString;
+    }
+
     @Override
     public String toString() {
-        return String.format("%-7s %-7s %-25s %-25s ",
+        return String.format("%-7s %-7s %s",
                 requiredLevel.getEligibility(),
                 matchLocation.toString(),
-                assignedReferees.getFirst().getFullName(),
-                assignedReferees.getLast().getFullName()
+                assignedRefereesToString()
         );
     }
 

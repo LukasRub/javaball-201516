@@ -3,6 +3,7 @@ package referee.restrictions;
 import match.Match;
 import referee.Referee;
 import referee.RefereeContainer;
+import referee.qualifications.QualLevel;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -27,9 +28,17 @@ public class LevelRestriction implements Restriction {
     public TreeMap<String, Referee> getRefereeList() {
         TreeMap<String, Referee> candidates = new TreeMap<String, Referee>();
         for (Map.Entry<String, Referee> entry : referees.entrySet()) {
-            if (entry.getValue().getQualificationLevel().getLevel() >= match.getRequiredLevel().getLevel()) {
+            QualLevel requiredLevel = match.getRequiredLevel();
+            QualLevel currentRefereeLevel = entry.getValue().getQualificationLevel();
+
+            if ((
+                    (requiredLevel == QualLevel.ONE) && (currentRefereeLevel == requiredLevel )
+                )
+                    ||
+                    (currentRefereeLevel.getLevel() >= requiredLevel.getLevel())) {
                 candidates.put(entry.getKey(), entry.getValue());
             }
+            if (entry.getValue().getQualificationLevel().getLevel() >= match.getRequiredLevel().getLevel()) {}
         }
         return candidates;
     }
