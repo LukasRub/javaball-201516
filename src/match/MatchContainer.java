@@ -59,20 +59,21 @@ public class MatchContainer {
         return ourInstance.availableWeeks.get(weekNumberIndex);
     }
 
-    public void printMatches() {
-        System.out.println("<===================== Matches =====================>");
-        for (Map.Entry<Integer, Match> entry : ourInstance.matches.entrySet()) {
-            System.out.println(String.format("Key: %2d | Value: | %s", entry.getKey(), entry.getValue().toString()));
-        }
-        System.out.println();
-    }
-
     private boolean isUnassignedWeek(int weekNumber) {
         return !ourInstance.matches.containsKey(weekNumber);
     }
 
     public int size() {
         return ourInstance.matches.size();
+    }
+
+    @Override
+    public String toString() {
+        String toString = "";
+        for (Map.Entry<Integer, Match> entry : ourInstance.matches.entrySet()) {
+            toString += String.format("%2d %s", entry.getKey(), entry.getValue().toString());
+        }
+        return toString;
     }
 
 }

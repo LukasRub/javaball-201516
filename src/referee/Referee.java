@@ -44,6 +44,20 @@ public class Referee {
 
     }
 
+    public Referee(String firstName, String lastName, QualBody qualificationBody, QualLevel qualificationLevel,
+                   Area area, ArrayList<Area> areaAvailability, int matchesAllocated) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.qualificationBody = qualificationBody;
+        this.qualificationLevel = qualificationLevel;
+        this.area = area;
+        this.areaAvailability = new ArrayList<Area>(areaAvailability);
+        this.matchesAllocated = matchesAllocated;
+
+        assignedMatches = new TreeMap<Integer, Match>();
+        parseInitials(firstName, lastName);
+    }
+
     public Referee(String id, String firstName, String lastName, String qualification,
                    String area, String areaAvailability, int matchesAllocated) {
         this(firstName, lastName, qualification, area, areaAvailability, matchesAllocated);
